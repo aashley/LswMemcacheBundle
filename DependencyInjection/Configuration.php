@@ -261,7 +261,13 @@ class Configuration implements ConfigurationInterface
                         ->thenInvalid('server_failure_limit option must be numeric')
                     ->end()
                 ->end()
-                ->booleanNode('client_mode')->defaultFalse()->end()
+                ->scalarNode('client_mode')
+                    ->defaultValue(0)
+                    ->validate()
+                    ->ifTrue(function($v) { return !is_numeric($v); })
+                        ->thenInvalid('client_mode must be either 0 or 1')
+                    ->end()
+                ->end()
             ->end()
         ->end();
 
