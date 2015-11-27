@@ -21,3 +21,4 @@ parameters:
         poll_timeout: 1000
         cache_lookups: false
         server_failure_limit: 0
+        client_mode: 0
